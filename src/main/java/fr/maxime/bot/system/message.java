@@ -23,14 +23,13 @@ public class message extends ListenerAdapter {
         User eventUser = event.getAuthor();
         String eventDate = new SimpleDateFormat("dd/MM HH:mm").format(Calendar.getInstance().getTime());
 
+
+
+        /*MSG DANS ANNONCE*/
         if(eventChannel.getId().equals(env.chanAnnId)){
 
-            System.out.println(eventMsg.getContentRaw());
             String msgRow = eventMsg.getContentRaw();
             String msgRowEdit = msgRow.replace(" ", "%20");
-
-            System.out.println("*********");
-
             Scanner scan = new Scanner(msgRowEdit);
             String msgRowLine = "";
 
@@ -45,19 +44,13 @@ public class message extends ListenerAdapter {
                     } else {
                         msgRowLine = msgRowLine + "%0D%0A" + scan.nextLine();
                     }
-
                 } else {
                     i = 7;
                 }
-
                 j++;
-
             }
-
-            System.out.println(msgRowLine);
-
             try {
-                String test = sendRequest("http://localhost/api.php?param1=" + msgRowLine);
+                String test = sendRequest(env.url + "api.php?param1=" + msgRowLine);
                 System.out.println(test);
             } catch (IOException e) {
                 e.printStackTrace();
