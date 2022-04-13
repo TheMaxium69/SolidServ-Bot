@@ -28,8 +28,4 @@ public class exemple {
         app.sendEmbed(channel ,embed.build());
     }
 
-    public static void Admin(MessageChannel channel, String userTag){
-        String message = "tu a bien les perms pour cette commande ``" + userTag + "``";
-        app.send(channel, message);
-    }
 }
