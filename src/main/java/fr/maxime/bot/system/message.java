@@ -30,6 +30,8 @@ public class message extends ListenerAdapter {
 
             String msgRow = eventMsg.getContentRaw();
             String msgRowEdit = msgRow.replace(" ", "%20");
+            msgRowEdit = msgRowEdit.replace("'", "%27");
+            msgRowEdit = msgRowEdit.replace("/", "%2F");
             Scanner scan = new Scanner(msgRowEdit);
             String msgRowLine = "";
 
@@ -50,8 +52,9 @@ public class message extends ListenerAdapter {
                 j++;
             }
             try {
-                String test = sendRequest(env.url + "api.php?param1=" + msgRowLine);
-                System.out.println(test);
+                System.out.println(env.url + "?content=" + msgRowLine + "&user=" + eventUser.getId() + "&token=" + env.tokenWeb);
+                String rs = sendRequest(env.url + "?content=" + msgRowLine + "&user=" + eventUser.getId() + "&token=" + env.tokenWeb);
+                System.out.println(rs);
             } catch (IOException e) {
                 e.printStackTrace();
             }
